@@ -168,7 +168,6 @@ function draw_grid!(tr::TernaryAxis)
 end
 
 function Makie.plot!(tr::TernaryAxis)
-
     # draw base
     draw_triangle_base!(tr)
     draw_triangle_vertex_labels!(tr)

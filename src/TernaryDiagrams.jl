@@ -45,31 +45,26 @@ TernaryAxis
 
 Draw the base triangle without any data to form a barycentric axis. Use the
 "adjustment" kwargs to adjust various formatting options.
-
-## Attributes
-$(Makie.ATTRIBUTES)
 """
-Makie.@recipe(TernaryAxis) do scene
-    Attributes(
-        labelx = "labelx",
-        labely = "labely",
-        labelz = "labelz",
-        label_fontsize = 18,
-        label_vertex_vertical_adjustment = 0.05,
-        label_edge_vertical_adjustment = 0.10,
-        label_edge_vertical_arrow_adjustment = 0.08,
-        labelx_arrow = nothing,
-        labely_arrow = nothing,
-        labelz_arrow = nothing,
-        arrow_scale = 0.4,
-        arrow_label_rotation_adjustment = 0.85,
-        arrow_label_fontsize = 16,
-        tick_fontsize = 8,
-        grid_line_color = :grey,
-        grid_line_width = 0.5,
-        hide_vertex_labels = false,
-        hide_triangle_labels = false,
-    )
+Makie.@recipe TernaryAxis begin
+    labelx = "labelx"
+    labely = "labely"
+    labelz = "labelz"
+    label_fontsize = 18
+    label_vertex_vertical_adjustment = 0.05
+    label_edge_vertical_adjustment = 0.10
+    label_edge_vertical_arrow_adjustment = 0.08
+    labelx_arrow = nothing
+    labely_arrow = nothing
+    labelz_arrow = nothing
+    arrow_scale = 0.4
+    arrow_label_rotation_adjustment = 0.85
+    arrow_label_fontsize = 16
+    tick_fontsize = 8
+    grid_line_color = :grey
+    grid_line_width = 0.5
+    hide_vertex_labels = false
+    hide_triangle_labels = false
 end
 
 include("axis.jl")
@@ -79,16 +74,11 @@ TernaryScatter
 
 Draw scattered data points using barycentric coordindates, `x`, `y`, `z`, i.e.
 `x + y + z = 1`. Attributes are passed to `scatter`. 
-
-## Attributes
-$(Makie.ATTRIBUTES)
 """
-@recipe(TernaryScatter, x, y, z) do scene
-    Attributes(
-        color = :red, # can also be an array of colors
-        marker = :circle,
-        markersize = 8,
-    )
+@recipe TernaryScatter (x, y, z) begin
+    color = :red # can also be an array of colors
+    marker = :circle
+    markersize = 8
 end
 
 include("scatter.jl")
@@ -98,12 +88,11 @@ TernaryLines
 
 Draw a line using barycentric coordindates, `x`, `y`, `z`, i.e.
 `x + y + z = 1`. Attributes are passed to `lines`. 
-
-## Attributes
-$(Makie.ATTRIBUTES)
 """
-@recipe(TernaryLines, x, y, z) do scene
-    Attributes(color = :red, linewidth = 4, linestyle = :solid)
+@recipe TernaryLines (x, y, z) begin
+    color = :red
+    linewidth = 4
+    linestyle = :solid
 end
 
 include("lines.jl")
@@ -120,21 +109,16 @@ z = 1`. The weight of the coordinates is passed through `w`.
 -  `pad_data` adds extra data points for the purpose of generating prettier
    isoclines. These padded points take the weight value of the closest actual
    data point's weight.  
-
-## Attributes
-$(Makie.ATTRIBUTES)
 """
-@recipe(TernaryContour, x, y, z, w) do scene
-    Attributes(
-        color = :black,
-        colormap = nothing,
-        levels = 5,
-        clip_min_w = -Inf,
-        clip_max_w = Inf,
-        linewidth = 4,
-        linestyle = :solid,
-        pad_data = false,
-    )
+@recipe TernaryContour (x, y, z, w) begin
+        color = :black
+        colormap = nothing
+        levels = 5
+        clip_min_w = -Inf
+        clip_max_w = Inf
+        linewidth = 4
+        linestyle = :solid
+        pad_data = false
 end
 
 include("contour.jl")
@@ -150,10 +134,10 @@ The data is always padded to make filling the entire plot area easier. Padded
 data is interpolated based on the nearest data point.
 
 ## Attributes
-$(Makie.ATTRIBUTES)
 """
-@recipe(TernaryContourf, x, y, z, w) do scene
-    Attributes(colormap = :Spectral, levels = 5)
+@recipe TernaryContourf (x, y, z, w) begin
+    colormap = :Spectral
+    levels = 5
 end
 
 include("contourfill.jl")
