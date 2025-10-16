@@ -12,7 +12,7 @@ VoronoiDelaunay = "72f80fcb-8c52-57d9-aff0-40c1a3526986"
 
 [compat]
 Aqua = "0.8"
-CairoMakie = "0.11, 0.12"
+CairoMakie = "0.15"
 ColorSchemes = "3"
 DocStringExtensions = "0.9"
 GeometricalPredicates = "0.4"
