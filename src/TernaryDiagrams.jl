@@ -132,8 +132,6 @@ Draw a filled contour plot using barycentric coordindates, `x`, `y`, `z`, i.e.
 ## Notes
 The data is always padded to make filling the entire plot area easier. Padded
 data is interpolated based on the nearest data point.
-
-## Attributes
 """
 @recipe TernaryContourf (x, y, z, w) begin
     colormap = :Spectral
