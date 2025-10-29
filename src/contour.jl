@@ -16,8 +16,8 @@ function Makie.plot!(tr::TernaryContour)
             push!(ws[], w)
         end
     end
-    Makie.Observables.onany(update_plot, tr[:x], tr[:y], tr[:z], tr[:w])
-    update_plot(tr[:x][], tr[:y][], tr[:z][], tr[:w][])
+    Makie.Observables.onany(update_plot, tr.x, tr.y, tr.z, tr.w)
+    update_plot(tr.x[], tr.y[], tr.z[], tr.w[])
 
     # make bins for levels
     lb = max(minimum(ws[]), tr.clip_min_w[])
@@ -26,12 +26,12 @@ function Makie.plot!(tr::TernaryContour)
     bins = [(lb + n * d) for n = 1:tr.levels[]]
 
     if tr.pad_data[]
-        data_coords = delaunay_scale.([gp.Point2D.(x, y) for (x, y) in zip(xs[], ys[])])
+        data_coords = delaunay_scale.([gp.Point2D(x, y) for (x, y) in zip(xs[], ys[])])
         pad_coords, pad_weights = generate_padded_data(data_coords, ws[])
         _scaled_coords = [data_coords; pad_coords]
         _weights = [ws[]; pad_weights]
     else
-        _scaled_coords = delaunay_scale.([gp.Point2D.(x, y) for (x, y) in zip(xs[], ys[])])
+        _scaled_coords = delaunay_scale.([gp.Point2D(x, y) for (x, y) in zip(xs[], ys[])])
         _weights = ws[]
     end
 

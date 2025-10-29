@@ -21,7 +21,7 @@ function Makie.plot!(tr::TernaryContourf)
         end
 
         # always pad data to make filling easier
-        data_coords = delaunay_scale.([gp.Point2D.(x, y) for (x, y) in zip(_xs, _ys)])
+        data_coords = delaunay_scale.([gp.Point2D(x, y) for (x, y) in zip(_xs, _ys)])
         pad_coords, pad_weights = generate_padded_data(data_coords, _ws)
         _scaled_coords = [data_coords; pad_coords]
         _weights = [_ws; pad_weights]
@@ -32,11 +32,11 @@ function Makie.plot!(tr::TernaryContourf)
         append!(ys[], [last(unpack(delaunay_unscale(p))) for p in scaled_coords])
         append!(ws[], weights)
     end
-    Makie.Observables.onany(update_plot, tr[:x], tr[:y], tr[:z], tr[:w])
-    update_plot(tr[:x][], tr[:y][], tr[:z][], tr[:w][])
+    Makie.Observables.onany(update_plot, tr.x, tr.y, tr.z, tr.w)
+    update_plot(tr.x[], tr.y[], tr.z[], tr.w[])
 
     # thanks Makie!
-    tricontourf!(tr, xs, ys, ws; levels = tr.levels[], colormap = tr.colormap[])
+    tricontourf!(tr, xs, ys, ws; levels = tr.levels, colormap = tr.colormap)
 
     tr
 end

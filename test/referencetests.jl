@@ -127,10 +127,7 @@ function testimage_temp()
         a3,
         mus;
         levels = 10,
-        linewidth = 4,
-        color = nothing,
         colormap = reverse(Makie.ColorSchemes.Spectral),
-        pad_data = true,
     )
 
     ternaryscatter!(

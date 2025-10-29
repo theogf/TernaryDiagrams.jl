@@ -13,15 +13,15 @@ function Makie.plot!(tr::TernaryScatter)
 
     Makie.Observables.onany(update_plot, tr[:x], tr[:y], tr[:z])
 
-    update_plot(tr[:x][], tr[:y][], tr[:z][])
+    update_plot(tr.x[], tr.y[], tr.z[])
 
     # plot data points
     scatter!(
         tr,
         dpoints,
-        color = tr.color[],
-        marker = tr.marker[],
-        markersize = tr.markersize[],
+        color = tr.color,
+        marker = tr.marker,
+        markersize = tr.markersize,
     )
 
     tr
