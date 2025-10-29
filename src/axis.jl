@@ -52,7 +52,7 @@ function draw_triangle_axis_labels!(tr::TernaryAxis)
     x0, y0 = (R*[0.7, 0.0, 0.3])[2:3] # eyeballed good looking arrow start
     y1 = y0 + y_arrow_adj / 2
     x1 = x0 - sqrt(3) * (y1 - y0)
-    arrows!(tr, [x1], [y1], [arrow_scale * r3[1]], [arrow_scale * r3[2]])
+    arrows2d!(tr, [x1], [y1], [arrow_scale * r3[1]], [arrow_scale * r3[2]])
 
     # lambda 2: the "y" axis
     x0, y0 = (R*[0.0, 0.5, 0.5])[2:3]
@@ -69,7 +69,7 @@ function draw_triangle_axis_labels!(tr::TernaryAxis)
     x0, y0 = (R*[0.0, 0.3, 0.7])[2:3]
     y1 = y0 + y_arrow_adj / 2
     x1 = x0 + sqrt(3) * (y1 - y0)
-    arrows!(
+    arrows2d!(
         tr,
         [x1],
         [y1],
@@ -91,7 +91,7 @@ function draw_triangle_axis_labels!(tr::TernaryAxis)
     x0, y0 = (R*[0.3, 0.7, 0.0])[2:3]
     y1 = y0 - y_arrow_adj
     x1 = x0
-    arrows!(tr, [x1], [y1], [-arrow_scale * r2[1]], [-arrow_scale * r2[2]])
+    arrows2d!(tr, [x1], [y1], [-arrow_scale * r2[1]], [-arrow_scale * r2[2]])
 end
 
 function draw_grid!(tr::TernaryAxis)
@@ -166,6 +166,9 @@ function draw_grid!(tr::TernaryAxis)
         )
     end
 end
+
+# Workaround https://github.com/MakieOrg/Makie.jl/issues/5336 since one cannot create a plot without arguments.
+ternaryaxis!(ax::Axis; kwargs...) = ternaryaxis!(ax, (); kwargs...)
 
 function Makie.plot!(tr::TernaryAxis)
     # draw base
